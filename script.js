@@ -1,5 +1,5 @@
 // ⚠️ Troque pela URL do seu Web App do Apps Script (termina em /exec)
-const API_URL = "https://script.google.com/macros/s/SEU_ID_AQUI/exec";
+const API_URL = "https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycby-JuFEmd7DSZwNZ9FxSjBfh6-Qka2wMSZ_e53iw6zr4zFgD-H6cZb5VvX4iqy2ZzSZHw/exec/exec";
 
 const select = document.getElementById("gift-select");
 const confirmBtn = document.getElementById("confirm-btn");
