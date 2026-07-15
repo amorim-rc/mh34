@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>trinta e quatro — mh</title>
+<meta name="description" content="Lista de presentes de aniversário da mh — trinta e quatro anos, 08/08.">
+<meta property="og:title" content="trinta e quatro — mh">
+<meta property="og:description" content="Lista de presentes de aniversário da mh.">
+<meta property="og:image" content="assets/logo.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/logo.jpg" type="image/jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,22 +21,54 @@
 
     <header class="masthead">
       <p class="address">rua mourato coelho 111</p>
+      <button id="share-btn" class="share-btn" type="button" aria-label="compartilhar este site">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <line x1="8.6" y1="10.5" x2="15.4" y2="6.5"></line>
+          <line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line>
+        </svg>
+      </button>
+      <span class="share-feedback" id="share-feedback" role="status" aria-live="polite"></span>
     </header>
 
     <div class="crest">
-      <img src="assets/logo.jpg" alt="mh — trinta e quatro" class="crest__img">
+      <img src="assets/logo.png" alt="mh — trinta e quatro" class="crest__img">
     </div>
+
+    <p class="hero__title">trinta e quatro</p>
 
     <div class="event-meta">
       <p class="event-meta__date">08 <span class="event-meta__sep">|</span> 08</p>
       <p class="event-meta__time">17h35min</p>
     </div>
 
+    <section class="countdown" id="countdown" aria-label="contagem regressiva para a festa">
+      <div class="countdown__item">
+        <span class="countdown__value" id="cd-days">00</span>
+        <span class="countdown__unit">dias</span>
+      </div>
+      <div class="countdown__item">
+        <span class="countdown__value" id="cd-hours">00</span>
+        <span class="countdown__unit">horas</span>
+      </div>
+      <div class="countdown__item">
+        <span class="countdown__value" id="cd-min">00</span>
+        <span class="countdown__unit">min</span>
+      </div>
+      <div class="countdown__item">
+        <span class="countdown__value" id="cd-sec">00</span>
+        <span class="countdown__unit">seg</span>
+      </div>
+    </section>
+
     <section class="intro">
       <h1 class="intro__title">lista de presentes</h1>
       <p class="intro__text">
-        Escolha um presente na lista abaixo. Ao confirmar, ele sai automaticamente
-        da lista — assim ninguém repete o mesmo presente. Simples assim.
+        Quer me dar um presente? 
+        Tica um da lista, quando confirmar, ele vai sumir
+        Assim ninguém repete o mesmo presente! 
       </p>
     </section>
 
@@ -63,6 +101,9 @@
 
     <footer class="footnote">
       <p>com carinho, mh</p>
+      <p class="footnote__editions">
+        <a href="editions/index.html">edições anteriores</a>
+      </p>
     </footer>
 
   </main>

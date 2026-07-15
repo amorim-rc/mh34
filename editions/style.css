@@ -1,0 +1,64 @@
+.edition-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 24px 0 8px;
+}
+
+.edition-btn {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  border: 1.5px solid var(--indigo);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--indigo);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.edition-btn:hover {
+  background: var(--indigo-soft);
+}
+
+.edition-btn:active {
+  transform: scale(0.99);
+}
+
+.edition-btn:focus-visible {
+  outline: 3px solid var(--indigo-deep);
+  outline-offset: 2px;
+}
+
+.back {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 24px;
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--indigo);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.back:hover {
+  background: var(--indigo-deep);
+}
+
+.back:active {
+  transform: scale(0.99);
+}
+
+.back:focus-visible {
+  outline: 3px solid var(--indigo-deep);
+  outline-offset: 2px;
+}

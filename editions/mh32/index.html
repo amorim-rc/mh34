@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MH 32</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
+</head>
+<body>
+    <form id="guestForm">
+        <h1>mh</h1>
+            <ln>trinta e dois</ln>
+        <h3>10 | 08</h3>
+
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" disabled><br><br>
+
+        <label for="companion">Tais vindo como?</label>
+        <div class="radio-group">
+            <div>
+                <label>
+                    <input type="radio" name="companion" value="alone" checked> só eu
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" name="companion" value="with-company"> eu e casca de bala
+                </label>
+            </div>
+        </div>
+
+        <label for="gift">Lista de presentes:<br>(tica aí o que tu comprou, ou vai comprar)</label>
+        <select id="gift" name="gift[]" disabled>
+        </select><br>
+
+        <div id="giftLinkDisplay"></div> <!-- Element to display the gift link -->
+
+        <button type="submit" disabled>Enviar confirmação</button>
+    </form>
+
+    <nav class="archive-nav">
+        <a class="archive-btn" href="../index.html">← outras edições</a>
+        <a class="archive-btn" href="../../index.html">edição atual →</a>
+    </nav>
+
+    <div id="response"></div>
+</body>
+</html>

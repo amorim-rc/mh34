@@ -12,6 +12,19 @@
   --font-body: 'Work Sans', system-ui, sans-serif;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --indigo: #8F84FF;
+    --indigo-deep: #ABA2FF;
+    --indigo-soft: #1C1454;
+    --ink: #F2F0FA;
+    --muted: #A79FD1;
+    --paper: #0D0730;
+    --ok: #34C98F;
+    --err: #FF6B6B;
+  }
+}
+
 * { box-sizing: border-box; }
 
 html, body {
@@ -40,8 +53,60 @@ body {
 
 .masthead {
   width: 100%;
-  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
   margin-bottom: 8px;
+}
+
+.share-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid var(--indigo);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--indigo);
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.share-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.share-btn:hover { background: var(--indigo-soft); }
+.share-btn:active { transform: scale(0.92); }
+
+.share-btn:focus-visible {
+  outline: 3px solid var(--indigo-deep);
+  outline-offset: 2px;
+}
+
+.share-feedback {
+  position: absolute;
+  top: 36px;
+  right: 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--indigo);
+  background: var(--indigo-soft);
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.share-feedback[data-visible="true"] {
+  opacity: 1;
 }
 
 .address {
@@ -63,6 +128,16 @@ body {
   width: 100%;
   height: auto;
   display: block;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 26px;
+  color: var(--indigo);
+  text-align: center;
+  letter-spacing: 0.02em;
+  margin: 4px 0 0;
 }
 
 .event-meta {
@@ -93,6 +168,53 @@ body {
   margin: 4px 0 0;
 }
 
+.countdown {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.countdown__item {
+  flex: 1;
+  max-width: 76px;
+  background: var(--paper);
+  border: 1.5px solid var(--indigo);
+  border-radius: 12px;
+  padding: 10px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.countdown__value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--indigo);
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown__unit {
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.countdown--done {
+  background: var(--indigo);
+  color: var(--paper);
+  border-radius: 14px;
+  padding: 14px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+}
+
 .intro {
   text-align: center;
   margin-bottom: 28px;
@@ -117,12 +239,14 @@ body {
 
 .gift-picker {
   width: 100%;
-  background: var(--indigo-soft);
+  background: var(--paper);
+  border: 1.5px solid var(--indigo);
   border-radius: 20px 20px 4px 4px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  box-shadow: 0 4px 20px rgba(24, 0, 172, 0.08);
 }
 
 .field__label {
@@ -155,6 +279,19 @@ body {
   cursor: default;
 }
 
+.field__select optgroup {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: normal;
+  color: var(--indigo);
+}
+
+.field__select option {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--ink);
+}
+
 .field__select:focus-visible,
 .btn:focus-visible {
   outline: 3px solid var(--indigo-deep);
@@ -163,6 +300,7 @@ body {
 
 .receipt {
   background: var(--paper);
+  border: 1px solid var(--indigo-soft);
   border-radius: 10px;
   padding: 14px 16px;
   display: flex;
@@ -242,10 +380,53 @@ body {
   margin: 0;
 }
 
+.footnote__editions {
+  margin-top: 8px !important;
+}
+
+.footnote__editions a {
+  color: var(--muted);
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+}
+
+.footnote__editions a:hover {
+  color: var(--indigo);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn { transition: none; }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .card > * {
+    animation: fade-in-up 0.5s ease both;
+  }
+
+  .card > *:nth-child(1) { animation-delay: 0s; }
+  .card > *:nth-child(2) { animation-delay: 0.06s; }
+  .card > *:nth-child(3) { animation-delay: 0.12s; }
+  .card > *:nth-child(4) { animation-delay: 0.18s; }
+  .card > *:nth-child(5) { animation-delay: 0.24s; }
+  .card > *:nth-child(6) { animation-delay: 0.3s; }
+  .card > *:nth-child(7) { animation-delay: 0.36s; }
+  .card > *:nth-child(8) { animation-delay: 0.42s; }
+}
+
 @media (max-width: 380px) {
   .gift-picker { padding: 18px; }
+  .countdown { gap: 6px; }
+  .countdown__item { padding: 8px 2px; }
+  .countdown__value { font-size: 17px; }
 }
