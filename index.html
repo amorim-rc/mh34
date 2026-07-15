@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>trinta e quatro — mh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="card">
+
+    <header class="masthead">
+      <p class="address">rua mourato coelho 111</p>
+    </header>
+
+    <div class="crest">
+      <img src="assets/logo.jpg" alt="mh — trinta e quatro" class="crest__img">
+    </div>
+
+    <div class="event-meta">
+      <p class="event-meta__date">08 <span class="event-meta__sep">|</span> 08</p>
+      <p class="event-meta__time">17h35min</p>
+    </div>
+
+    <section class="intro">
+      <h1 class="intro__title">lista de presentes</h1>
+      <p class="intro__text">
+        Escolha um presente na lista abaixo. Ao confirmar, ele sai automaticamente
+        da lista — assim ninguém repete o mesmo presente. Simples assim.
+      </p>
+    </section>
+
+    <section class="gift-picker" id="gift-picker">
+
+      <div class="field">
+        <label for="gift-select" class="field__label">presente</label>
+        <select id="gift-select" class="field__select" disabled>
+          <option value="">carregando lista...</option>
+        </select>
+      </div>
+
+      <div class="receipt" id="receipt" hidden>
+        <div class="receipt__row">
+          <span class="receipt__label">item</span>
+          <span class="receipt__value" id="receipt-item">—</span>
+        </div>
+        <div class="receipt__divider"></div>
+        <div class="receipt__row">
+          <span class="receipt__label">valor aproximado</span>
+          <span class="receipt__value" id="receipt-price">—</span>
+        </div>
+      </div>
+
+      <button id="confirm-btn" class="btn" disabled>confirmar presente</button>
+
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+
+    </section>
+
+    <footer class="footnote">
+      <p>com carinho, mh</p>
+    </footer>
+
+  </main>
+
+<script src="script.js"></script>
+</body>
+</html>

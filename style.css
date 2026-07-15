@@ -1,0 +1,251 @@
+:root {
+  --indigo: #1800AC;
+  --indigo-deep: #10007A;
+  --indigo-soft: #ECE9FB;
+  --ink: #140033;
+  --muted: #6E64A6;
+  --paper: #FFFFFF;
+  --ok: #0B8A5C;
+  --err: #C23B3B;
+
+  --font-display: 'Baloo 2', system-ui, sans-serif;
+  --font-body: 'Work Sans', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 20px 80px;
+}
+
+.card {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.masthead {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.address {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--indigo);
+  margin: 0;
+}
+
+.crest {
+  width: 100%;
+  max-width: 300px;
+  margin: 8px 0 4px;
+}
+
+.crest__img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.event-meta {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.event-meta__date {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--indigo);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.event-meta__sep {
+  color: var(--muted);
+  font-weight: 400;
+  margin: 0 4px;
+}
+
+.event-meta__time {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.intro__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+.intro__text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+  max-width: 340px;
+  margin-inline: auto;
+}
+
+.gift-picker {
+  width: 100%;
+  background: var(--indigo-soft);
+  border-radius: 20px 20px 4px 4px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field__label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--indigo);
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+}
+
+.field__select {
+  width: 100%;
+  appearance: none;
+  border: 1.5px solid var(--indigo);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 14px;
+  cursor: pointer;
+}
+
+.field__select:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.field__select:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--indigo-deep);
+  outline-offset: 2px;
+}
+
+.receipt {
+  background: var(--paper);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.receipt__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.receipt__label {
+  font-size: 11px;
+  text-transform: lowercase;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+
+.receipt__value {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: right;
+}
+
+.receipt__divider {
+  border-top: 1px dashed var(--muted);
+  opacity: 0.5;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background: var(--indigo);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.btn:hover:not(:disabled) { background: var(--indigo-deep); }
+.btn:active:not(:disabled) { transform: scale(0.99); }
+
+.btn:disabled {
+  background: var(--muted);
+  cursor: default;
+}
+
+.status {
+  min-height: 18px;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+}
+
+.status[data-state="ok"] { color: var(--ok); }
+.status[data-state="err"] { color: var(--err); }
+
+.footnote {
+  margin-top: 36px;
+  text-align: center;
+}
+
+.footnote p {
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+}
+
+@media (max-width: 380px) {
+  .gift-picker { padding: 18px; }
+}
