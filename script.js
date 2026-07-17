@@ -1,11 +1,13 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbz_gum8OPegUvJ5s_SxQi7qKG0_vcyZaDTifQKob5CoxSjEjp8VJPkDJcpJL-r5dKjiuQ/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbx9hUWJrjR36_UxUS1Ee0ubKU8H-zPpIxSd1FiOAITpnRWd19sITq7PdcHVRiTAFXG6VQ/exec";
 
 const select = document.getElementById("gift-select");
 const confirmBtn = document.getElementById("confirm-btn");
 const statusEl = document.getElementById("status");
 const receiptEl = document.getElementById("receipt");
 const receiptItem = document.getElementById("receipt-item");
-const receiptPrice = document.getElementById("receipt-price");
+const receiptSize = document.getElementById("receipt-size");
+const receiptColor = document.getElementById("receipt-color");
+const receiptLink = document.getElementById("receipt-link");
 
 let gifts = [];
 
@@ -98,7 +100,19 @@ select.addEventListener("change", () => {
     return;
   }
   receiptItem.textContent = chosen.presente;
-  receiptPrice.textContent = formatPrice(chosen.preco);
+  receiptSize.textContent = chosen.tamanho || "—";
+  receiptColor.textContent = chosen.cor || "—";
+
+  if (chosen.link) {
+    receiptLink.href = chosen.link;
+    receiptLink.textContent = "ver produto ↗";
+    receiptLink.classList.remove("receipt__link--empty");
+  } else {
+    receiptLink.removeAttribute("href");
+    receiptLink.textContent = "—";
+    receiptLink.classList.add("receipt__link--empty");
+  }
+
   receiptEl.hidden = false;
   confirmBtn.disabled = false;
   setStatus("");
@@ -132,6 +146,50 @@ confirmBtn.addEventListener("click", async () => {
   } catch (err) {
     setStatus("Erro ao confirmar. Tente novamente.", "err");
     confirmBtn.disabled = false;
+  }
+});
+
+const rsvpNameInput = document.getElementById("rsvp-name");
+const rsvpBtn = document.getElementById("rsvp-btn");
+const rsvpStatusEl = document.getElementById("rsvp-status");
+
+function setRsvpStatus(message, state) {
+  rsvpStatusEl.textContent = message;
+  if (state) {
+    rsvpStatusEl.setAttribute("data-state", state);
+  } else {
+    rsvpStatusEl.removeAttribute("data-state");
+  }
+}
+
+rsvpBtn.addEventListener("click", async () => {
+  const nome = rsvpNameInput.value.trim();
+  if (!nome) {
+    setRsvpStatus("escreve seu nome antes de confirmar.", "err");
+    return;
+  }
+  const acompanhado = document.querySelector('input[name="rsvp-companion"]:checked').value === "with-company";
+
+  rsvpBtn.disabled = true;
+  setRsvpStatus("enviando...");
+
+  try {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify({ type: "rsvp", nome, acompanhado }),
+    });
+    const result = await res.json();
+
+    if (result.ok) {
+      setRsvpStatus(`presença confirmada, ${nome}. Te espero lá! 💙`, "ok");
+    } else {
+      setRsvpStatus("não deu pra confirmar. Tenta de novo.", "err");
+      rsvpBtn.disabled = false;
+    }
+  } catch (err) {
+    setRsvpStatus("erro ao confirmar. Tenta de novo.", "err");
+    rsvpBtn.disabled = false;
   }
 });
 

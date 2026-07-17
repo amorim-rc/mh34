@@ -20,7 +20,7 @@
   <main class="card">
 
     <header class="masthead">
-      <p class="address">rua mourato coelho 111</p>
+      <p class="address">rua mourato coelho, 111</p>
       <button id="share-btn" class="share-btn" type="button" aria-label="compartilhar este site">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="18" cy="5" r="3"></circle>
@@ -63,11 +63,36 @@
       </div>
     </section>
 
+    <section class="rsvp" id="rsvp">
+      <div class="field">
+        <label for="rsvp-name" class="field__label">seu nome</label>
+        <input type="text" id="rsvp-name" class="field__input" placeholder="como você quer aparecer">
+      </div>
+
+      <div class="field">
+        <span class="field__label">vai sozinho ou acompanhado?</span>
+        <div class="radio-group">
+          <label class="radio-pill">
+            <input type="radio" name="rsvp-companion" value="alone" checked>
+            só eu
+          </label>
+          <label class="radio-pill">
+            <input type="radio" name="rsvp-companion" value="with-company">
+            com acompanhante
+          </label>
+        </div>
+      </div>
+
+      <button id="rsvp-btn" class="btn" type="button">confirmar presença</button>
+
+      <p class="status" id="rsvp-status" role="status" aria-live="polite"></p>
+    </section>
+
     <section class="intro">
       <h1 class="intro__title">lista de presentes</h1>
       <p class="intro__text">
         Quer me dar um presente? 
-        Tica um da lista, quando confirmar, ele vai sumir
+        Tica um da lista, quando confirmar, ele vai sumir.
         Assim ninguém repete o mesmo presente! 
       </p>
     </section>
@@ -75,7 +100,6 @@
     <section class="gift-picker" id="gift-picker">
 
       <div class="field">
-        <label for="gift-select" class="field__label">presente</label>
         <select id="gift-select" class="field__select" disabled>
           <option value="">carregando lista...</option>
         </select>
@@ -88,8 +112,18 @@
         </div>
         <div class="receipt__divider"></div>
         <div class="receipt__row">
-          <span class="receipt__label">valor aproximado</span>
-          <span class="receipt__value" id="receipt-price">—</span>
+          <span class="receipt__label">tamanho</span>
+          <span class="receipt__value" id="receipt-size">—</span>
+        </div>
+        <div class="receipt__divider"></div>
+        <div class="receipt__row">
+          <span class="receipt__label">cor</span>
+          <span class="receipt__value" id="receipt-color">—</span>
+        </div>
+        <div class="receipt__divider"></div>
+        <div class="receipt__row">
+          <span class="receipt__label">link</span>
+          <a class="receipt__value receipt__link" id="receipt-link" href="#" target="_blank" rel="noopener noreferrer">—</a>
         </div>
       </div>
 

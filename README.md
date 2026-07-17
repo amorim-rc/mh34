@@ -15,13 +15,16 @@ O site inteiro é estático — HTML/CSS/JS puro, sem build step — então bast
 
 O `script.js` busca os presentes num Google Apps Script publicado como Web App, que lê uma planilha do Google Sheets.
 
-**Planilha:** uma aba com as colunas `id`, `presente`, `preco`, `status` (valores de status: `disponivel` / `reservado`).
+**Planilha — aba `presentes`:** colunas `id`, `presente`, `preco`, `status` (`disponivel` / `reservado`), `tamanho`, `cor` (nem todo link de produto persiste no tempo, então a cor exata fica registrada aqui pros itens que têm variação), `link` (URL do produto, pra quem for comprar pesquisar/conferir).
+
+**Planilha — aba `confirmacoes`** (nova, pro RSVP de nome + sozinho/acompanhado): colunas `nome`, `acompanhado`, `criado_em`. Só precisa da linha de cabeçalho — o script preenche o resto.
 
 **Apps Script** (colar em Extensões → Apps Script, a partir da própria planilha ou de um projeto avulso):
 
 ```javascript
 const SPREADSHEET_ID = "COLE_AQUI_O_ID_DA_PLANILHA"; // vem da URL: .../spreadsheets/d/<ID>/edit
 const SHEET_NAME = "presentes"; // nome exato da aba, sem espaço a mais no final
+const RSVP_SHEET_NAME = "confirmacoes"; // idem, aba do RSVP
 
 function doGet(e) {
   const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_NAME);
@@ -32,18 +35,34 @@ function doGet(e) {
     presente: header.indexOf("presente"),
     preco: header.indexOf("preco"),
     status: header.indexOf("status"),
+    tamanho: header.indexOf("tamanho"),
+    cor: header.indexOf("cor"),
+    link: header.indexOf("link"),
   };
   const gifts = data
     .filter((row) => row[idx.id] !== "")
-    .map((row) => ({ id: row[idx.id], presente: row[idx.presente], preco: row[idx.preco], status: row[idx.status] }));
+    .map((row) => ({
+      id: row[idx.id],
+      presente: row[idx.presente],
+      preco: row[idx.preco],
+      status: row[idx.status],
+      tamanho: row[idx.tamanho],
+      cor: row[idx.cor],
+      link: row[idx.link],
+    }));
   return ContentService.createTextOutput(JSON.stringify(gifts)).setMimeType(ContentService.MimeType.JSON);
 }
 
 function doPost(e) {
+  const body = JSON.parse(e.postData.contents);
+  if (body.type === "rsvp") return handleRsvp(body);
+  return handleGiftReservation(body);
+}
+
+function handleGiftReservation(body) {
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
-    const body = JSON.parse(e.postData.contents);
     const targetId = String(body.id);
     const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_NAME);
     const rows = sheet.getDataRange().getValues();
@@ -62,10 +81,24 @@ function doPost(e) {
   }
 }
 
+function handleRsvp(body) {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(RSVP_SHEET_NAME);
+    sheet.appendRow([body.nome, body.acompanhado ? "sim" : "não", new Date()]);
+    return respond({ ok: true });
+  } finally {
+    lock.releaseLock();
+  }
+}
+
 function respond(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
 ```
+
+O front-end (`script.js`) já manda `{ type: "rsvp", nome, acompanhado }` no POST do componente de presença, e `{ id }` (sem `type`) no POST de reserva de presente — é assim que `doPost` decide qual dos dois tratar.
 
 Pontos que já causaram dor de cabeça e valem nota:
 - Use sempre `SpreadsheetApp.openById(SPREADSHEET_ID)`, nunca `getActive()` — um script deployado como Web App não tem "planilha ativa" de forma confiável.
@@ -101,3 +134,5 @@ Cada aniversário passado vira uma pasta congelada dentro de `editions/<ano>/` (
 4. O link "voltar para a edição atual" em `editions/index.html` já é um botão sólido e grande de propósito — não deixe ele voltar a ser um linkzinho discreto, é fácil de perder de vista.
 
 Nenhuma edição arquivada precisa (nem deve) ter o formulário de presentes funcionando de fato — o objetivo é lembrança, não reserva.
+
+**mh33** é um caso especial: não teve site na época, então `editions/mh33/` foi criado do zero (não é cópia de nada) com só um componente central, no mesmo espírito do mh32. Assim que tiver a arte do convite, salve o arquivo em `editions/mh33/assets/convite.jpg` (ou `.png`) e troque o bloco `.invite-placeholder` do `editions/mh33/index.html` pela tag `<img>` comentada logo acima dele no próprio arquivo. A paleta usada por enquanto é o indigo padrão do mh34 — pode (e deve) trocar pelas cores da arte quando ela chegar.

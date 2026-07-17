@@ -1,0 +1,119 @@
+:root {
+  --indigo: #1800AC;
+  --indigo-deep: #10007A;
+  --indigo-soft: #ECE9FB;
+  --ink: #140033;
+  --muted: #6E64A6;
+  --paper: #FFFFFF;
+
+  --font-display: 'Baloo 2', system-ui, sans-serif;
+  --font-body: 'Work Sans', system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --indigo: #8F84FF;
+    --indigo-deep: #ABA2FF;
+    --indigo-soft: #1C1454;
+    --ink: #F2F0FA;
+    --muted: #A79FD1;
+    --paper: #0D0730;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--indigo-soft);
+  font-family: var(--font-body);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0;
+}
+
+.invite {
+  width: 100%;
+  border-radius: 20px;
+  display: block;
+  box-shadow: 0 4px 20px rgba(24, 0, 172, 0.1);
+}
+
+.invite-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: var(--paper);
+  border: 1.5px dashed var(--indigo);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(24, 0, 172, 0.08);
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 26px;
+  color: var(--indigo);
+  margin: 0;
+}
+
+.placeholder-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.archive-nav {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.archive-btn {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  border: 1.5px solid var(--indigo);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--indigo);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.archive-btn:hover {
+  background: var(--indigo-soft);
+}

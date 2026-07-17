@@ -237,16 +237,21 @@ body {
   margin-inline: auto;
 }
 
-.gift-picker {
+.gift-picker,
+.rsvp {
   width: 100%;
   background: var(--paper);
   border: 1.5px solid var(--indigo);
-  border-radius: 20px 20px 4px 4px;
+  border-radius: 20px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   box-shadow: 0 4px 20px rgba(24, 0, 172, 0.08);
+}
+
+.rsvp {
+  margin-bottom: 28px;
 }
 
 .field__label {
@@ -277,6 +282,59 @@ body {
 .field__select:disabled {
   opacity: 0.6;
   cursor: default;
+}
+
+.field__input {
+  width: 100%;
+  border: 1.5px solid var(--indigo);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 14px;
+}
+
+.field__input::placeholder {
+  color: var(--muted);
+}
+
+.field__input:focus-visible {
+  outline: 3px solid var(--indigo-deep);
+  outline-offset: 2px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.radio-pill {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--indigo-soft);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.radio-pill:has(input:checked) {
+  border-color: var(--indigo);
+  color: var(--indigo);
+  font-weight: 600;
+}
+
+.radio-pill input {
+  accent-color: var(--indigo);
 }
 
 .field__select optgroup {
@@ -333,6 +391,21 @@ body {
 .receipt__divider {
   border-top: 1px dashed var(--muted);
   opacity: 0.5;
+}
+
+.receipt__link {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.receipt__link:hover {
+  color: var(--indigo);
+}
+
+.receipt__link--empty {
+  color: var(--ink);
+  text-decoration: none;
+  pointer-events: none;
 }
 
 .btn {
@@ -422,6 +495,7 @@ body {
   .card > *:nth-child(6) { animation-delay: 0.3s; }
   .card > *:nth-child(7) { animation-delay: 0.36s; }
   .card > *:nth-child(8) { animation-delay: 0.42s; }
+  .card > *:nth-child(9) { animation-delay: 0.48s; }
 }
 
 @media (max-width: 380px) {
