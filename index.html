@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  (function () {
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    }
+  })();
+</script>
 <title>trinta e quatro — mh</title>
 <meta name="description" content="Lista de presentes de aniversário da mh — trinta e quatro anos, 08/08.">
 <meta property="og:title" content="trinta e quatro — mh">
@@ -21,15 +28,33 @@
 
     <header class="masthead">
       <p class="address">rua mourato coelho, 111</p>
-      <button id="share-btn" class="share-btn" type="button" aria-label="compartilhar este site">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="18" cy="5" r="3"></circle>
-          <circle cx="6" cy="12" r="3"></circle>
-          <circle cx="18" cy="19" r="3"></circle>
-          <line x1="8.6" y1="10.5" x2="15.4" y2="6.5"></line>
-          <line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line>
-        </svg>
-      </button>
+      <div class="masthead__actions">
+        <button id="theme-btn" class="theme-btn" type="button" aria-label="mudar para modo escuro">
+          <svg class="theme-btn__icon theme-btn__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <line x1="12" y1="2" x2="12" y2="4"></line>
+            <line x1="12" y1="20" x2="12" y2="22"></line>
+            <line x1="4.2" y1="4.2" x2="5.6" y2="5.6"></line>
+            <line x1="18.4" y1="18.4" x2="19.8" y2="19.8"></line>
+            <line x1="2" y1="12" x2="4" y2="12"></line>
+            <line x1="20" y1="12" x2="22" y2="12"></line>
+            <line x1="4.2" y1="19.8" x2="5.6" y2="18.4"></line>
+            <line x1="18.4" y1="5.6" x2="19.8" y2="4.2"></line>
+          </svg>
+          <svg class="theme-btn__icon theme-btn__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <button id="share-btn" class="share-btn" type="button" aria-label="compartilhar este site">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.6" y1="10.5" x2="15.4" y2="6.5"></line>
+            <line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line>
+          </svg>
+        </button>
+      </div>
       <span class="share-feedback" id="share-feedback" role="status" aria-live="polite"></span>
     </header>
 
@@ -121,8 +146,7 @@
           <span class="receipt__value" id="receipt-color">—</span>
         </div>
         <div class="receipt__divider"></div>
-        <div class="receipt__row">
-          <span class="receipt__label">link</span>
+        <div class="receipt__row receipt__row--link">
           <a class="receipt__value receipt__link" id="receipt-link" href="#" target="_blank" rel="noopener noreferrer">—</a>
         </div>
       </div>

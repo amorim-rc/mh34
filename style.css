@@ -12,17 +12,15 @@
   --font-body: 'Work Sans', system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --indigo: #8F84FF;
-    --indigo-deep: #ABA2FF;
-    --indigo-soft: #1C1454;
-    --ink: #F2F0FA;
-    --muted: #A79FD1;
-    --paper: #0D0730;
-    --ok: #34C98F;
-    --err: #FF6B6B;
-  }
+:root[data-theme="dark"] {
+  --indigo: #8F84FF;
+  --indigo-deep: #ABA2FF;
+  --indigo-soft: #1C1454;
+  --ink: #F2F0FA;
+  --muted: #A79FD1;
+  --paper: #0D0730;
+  --ok: #34C98F;
+  --err: #FF6B6B;
 }
 
 * { box-sizing: border-box; }
@@ -60,7 +58,15 @@ body {
   margin-bottom: 8px;
 }
 
-.share-btn {
+.masthead__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.share-btn,
+.theme-btn {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
@@ -76,18 +82,25 @@ body {
   transition: background 0.15s ease, transform 0.05s ease;
 }
 
-.share-btn svg {
+.share-btn svg,
+.theme-btn svg {
   width: 15px;
   height: 15px;
 }
 
-.share-btn:hover { background: var(--indigo-soft); }
-.share-btn:active { transform: scale(0.92); }
+.share-btn:hover, .theme-btn:hover { background: var(--indigo-soft); }
+.share-btn:active, .theme-btn:active { transform: scale(0.92); }
 
-.share-btn:focus-visible {
+.share-btn:focus-visible,
+.theme-btn:focus-visible {
   outline: 3px solid var(--indigo-deep);
   outline-offset: 2px;
 }
+
+.theme-btn__icon--moon { display: none; }
+
+:root[data-theme="dark"] .theme-btn__icon--sun { display: none; }
+:root[data-theme="dark"] .theme-btn__icon--moon { display: block; }
 
 .share-feedback {
   position: absolute;
@@ -373,6 +386,10 @@ body {
   gap: 12px;
 }
 
+.receipt__row--link {
+  justify-content: center;
+}
+
 .receipt__label {
   font-size: 11px;
   text-transform: lowercase;
@@ -394,6 +411,7 @@ body {
 }
 
 .receipt__link {
+  text-align: center;
   text-decoration: underline;
   text-underline-offset: 2px;
 }

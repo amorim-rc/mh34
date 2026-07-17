@@ -105,7 +105,7 @@ select.addEventListener("change", () => {
 
   if (chosen.link) {
     receiptLink.href = chosen.link;
-    receiptLink.textContent = "ver produto ↗";
+    receiptLink.textContent = "link para a compra na loja ↗";
     receiptLink.classList.remove("receipt__link--empty");
   } else {
     receiptLink.removeAttribute("href");
@@ -223,6 +223,27 @@ function updateCountdown() {
 
 updateCountdown();
 countdownTimer = setInterval(updateCountdown, 1000);
+
+const themeBtn = document.getElementById("theme-btn");
+
+function updateThemeLabel() {
+  const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+  themeBtn.setAttribute("aria-label", isDark ? "mudar para modo claro" : "mudar para modo escuro");
+}
+
+updateThemeLabel();
+
+themeBtn.addEventListener("click", () => {
+  const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+  if (isDark) {
+    document.documentElement.removeAttribute("data-theme");
+    localStorage.setItem("theme", "light");
+  } else {
+    document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("theme", "dark");
+  }
+  updateThemeLabel();
+});
 
 const shareBtn = document.getElementById("share-btn");
 const shareFeedback = document.getElementById("share-feedback");
