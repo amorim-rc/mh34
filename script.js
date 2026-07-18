@@ -97,6 +97,12 @@ select.addEventListener("change", () => {
   if (!chosen) {
     receiptEl.hidden = true;
     confirmBtn.disabled = true;
+    receiptItem.textContent = "—";
+    receiptSize.textContent = "—";
+    receiptColor.textContent = "—";
+    receiptLink.removeAttribute("href");
+    receiptLink.textContent = "—";
+    receiptLink.classList.add("receipt__link--empty");
     return;
   }
   receiptItem.textContent = chosen.presente;

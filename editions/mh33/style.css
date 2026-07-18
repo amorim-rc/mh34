@@ -26,7 +26,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--indigo-soft);
+  background: var(--paper);
   font-family: var(--font-body);
 }
 
